@@ -259,7 +259,7 @@ var jXHR = {
 		// Set the Accept Header
 		// TODO: accept multiple dataTypes
 		if (o.dataType && jXHR.accepts[o.dataType]) {
-			if (XHR.accepts[o.dataType]) {
+			if (jXHR.accepts[o.dataType]) {
 				xhr.setRequestHeader('Accept', jXHR.accepts[o.dataType]);
 			} else {
 				xhr.setRequestHeader('Accept', o.dataType);
