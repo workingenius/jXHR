@@ -178,29 +178,15 @@ var jXHR = {
 			_xhr.status = status;
 			_xhr.statusText = (this.statusText || statusText) + "";
 
+			// TODO
+			//   callback's context may differ from real jquery's
 			// Success/Error
 			if (isSuccess) {
-				o.success({
-					data: response.data,
-					status: status,
-					xhr: _xhr
-				});
-				dfd.resolve({
-					data: response.data,
-					status: status,
-					xhr: _xhr
-				});
+				o.success(response.data, status, _xhr);
+				dfd.resolve(response.data, status, _xhr);
 			} else {
-				o.error({
-					xhr: _xhr,
-					status: status,
-					error: error
-				});
-				dfd.reject({
-					xhr: _xhr,
-					status: status,
-					error: error
-				});
+				o.error(_xhr, status, error);
+				dfd.reject(_xhr, status, error);
 			}
 			o.complete();
 		};
@@ -216,16 +202,8 @@ var jXHR = {
 			_xhr.statusText = statusText;
 			error = error || statusText;
 
-			o.error({
-				xhr: _xhr,
-				status: status,
-				error: error
-			});
-			dfd.reject({
-				xhr: _xhr,
-				status: status,
-				error: error
-			});
+			o.error(_xhr, status, error);
+			dfd.reject(_xhr, status, error);
 			o.complete();
 		};
 
